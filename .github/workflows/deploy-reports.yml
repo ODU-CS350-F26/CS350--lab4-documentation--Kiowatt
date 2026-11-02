@@ -1,8 +1,10 @@
+
 name: Deploy Reports
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -22,13 +24,26 @@ jobs:
           java-version: 17
 
       - name: Generate Reports
-        run: ./gradlew test javadoc
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test javadoc
 
       - name: Prepare Reports
         run: |
-          mkdir -p build/reports
-          cp -r build/reports/javadoc/. build/reports/
-          cp src/main/html/index.md build/reports/index.md
+          mkdir -p build/reports/javadoc
+
+          JAVADOC_DIR=$(find build -type f -path '*/javadoc/index.html' -print -quit | xargs dirname)
+
+          if [ -z "$JAVADOC_DIR" ]; then
+            echo "Javadoc output directory was not found."
+            exit 1
+          fi
+
+          cp -R "$JAVADOC_DIR/." build/reports/javadoc/
+
+          if [ -f src/main/html/index.md ]; then
+            cp src/main/html/index.md build/reports/index.md
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -36,4 +51,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/reports
           publish_branch: gh-pages
-```
