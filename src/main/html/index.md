@@ -1,6 +1,6 @@
 # Project Reports
 
-Your Name
+Nasir Freeman
 
-* [Tests](./reports/tests/test/)
-* [JavaDoc](./reports/javadoc/)
+* [Test Reports](./tests/test/)
+* [JavaDoc Reports](./javadoc/)
