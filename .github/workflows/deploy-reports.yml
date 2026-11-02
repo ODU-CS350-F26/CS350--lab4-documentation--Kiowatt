@@ -26,8 +26,8 @@ jobs:
 
       - name: Prepare Reports
         run: |
-          mkdir -p build/reports/javadoc
-          cp -r build/docs/javadoc/. build/reports/javadoc/
+          mkdir -p build/reports
+          cp -r build/reports/javadoc/. build/reports/
           cp src/main/html/index.md build/reports/index.md
 
       - name: Deploy to GitHub Pages
@@ -36,3 +36,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/reports
           publish_branch: gh-pages
+```
