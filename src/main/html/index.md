@@ -2,5 +2,7 @@
 
 Nasir Freeman
 
-* [Test Reports](./tests/test/)
-* [JavaDoc Reports](./javadoc/)
+## Available Reports
+
+- [JUnit Test Report](./tests/test/)
+- [JavaDoc Documentation](./javadoc/)
