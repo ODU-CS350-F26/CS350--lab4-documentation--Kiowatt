@@ -1,4 +1,3 @@
-
 name: Deploy Reports
 
 on:
@@ -20,7 +19,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 11
+          java-version: 17
 
       - name: Generate Reports
         run: ./gradlew test javadoc
@@ -28,7 +27,7 @@ jobs:
       - name: Prepare Reports
         run: |
           mkdir -p build/reports/javadoc
-          cp -r build/docs/javadoc/* build/reports/javadoc/
+          cp -r build/docs/javadoc/. build/reports/javadoc/
           cp src/main/html/index.md build/reports/index.md
 
       - name: Deploy to GitHub Pages
