@@ -31,3 +31,14 @@ application { //Allows  ./gradlew run --args=path-to-test-data
     mainClass = 'edu.odu.cs.MostCommonWords'
 }
 
+javadoc {
+    destinationDir = file("$buildDir/reports/javadoc")
+}
+
+test {
+    reports {
+        html.required = true
+        junitXml.required = true
+    }
+}
+
