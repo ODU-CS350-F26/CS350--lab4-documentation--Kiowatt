@@ -20,9 +20,12 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
-
-      - name: Generate Reports
-        run: ./gradlew test javadoc
+          
+      - name: Prepare Reports
+        run: |
+          mkdir -p build/reports/javadoc
+          cp -r build/docs/javadoc/* build/reports/javadoc/
+          cp src/main/html/index.md build/reports/index.md
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
